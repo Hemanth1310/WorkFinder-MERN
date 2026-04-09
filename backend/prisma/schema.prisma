@@ -18,10 +18,32 @@ enum Role {
   EMPLOYER
 }
 
+enum Experience{
+  Experienced
+  Intermediate
+  Begginer
+}
+
+enum JobType{
+  Fulltime
+  Internship
+  Freelance
+}
+
+enum Category{
+  Software
+  Design
+  Sales
+  Marketing
+  Finance
+}
+
 model User {
   id          String   @id @default(uuid())
   email       String   @unique
   password    String
+  firstName   String
+  lastName    String
   role        Role     @default(CANDIDATE) // Distinguishes Employer vs Candidate
   createdAt   DateTime @default(now())
   
@@ -48,6 +70,9 @@ model JobPosting {
   description String   @db.Text
   companyName String
   location    String
+  jobType     JobType
+  experience  Experience
+  category    Category
   salary      Int?
   
   // The Employer who posted it
