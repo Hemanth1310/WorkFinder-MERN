@@ -18,7 +18,7 @@ const Header = () => {
         </div>
         {isLoggedIn?
         <div>
-          <button className='' onClick={()=>setIsOpen(true)}>Login</button>
+          <button className='hover:border-b-2 hover:border-b-brand-primary' onClick={()=>setIsOpen(true)}>Login</button>
         </div> :
         <div>
           </div>}
