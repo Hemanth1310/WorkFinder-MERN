@@ -33,6 +33,23 @@ const Sidebar = () => {
               </div>
             </div>
         </div>
+        <div className="mt-5 mb-5">
+            <p className="mb-3">Experience Level</p>
+            <div className=" border border-mist-200   box-border text-sm rounded-md p-3">
+              <div className="flex gap-2 mb-2">
+                <input name='jobType' type='radio'></input>
+                <label className="text-xs">Experienced</label>
+              </div>
+               <div className="flex gap-2 mb-2">
+                <input name='jobType' type='radio'></input>
+                <label className="text-xs">Intermediate</label>
+              </div>
+               <div className="flex gap-2 ">
+                <input name='jobType' type='radio'></input>
+                <label className="text-xs">Beginner</label>
+              </div>
+            </div>
+        </div>
     </div>
   )
 }
