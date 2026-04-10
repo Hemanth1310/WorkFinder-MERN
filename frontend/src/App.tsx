@@ -3,6 +3,7 @@ import Header from "./components/layouts/Header"
 import { Routes } from "react-router"
 import Home from "./views/Home"
 import Sidebar from "./components/layouts/Sidebar"
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             </Routes>
           </div> 
         </div>
+        <ToastContainer/>
       </div>
     </BrowserRouter>
     
