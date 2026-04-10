@@ -3,6 +3,22 @@ import { prisma } from './prisma.js'
 
 const router = express.Router()
 
+
+router.get('/logout',(req,res)=>{
+    res.clearCookie('token',{
+            httpOnly: true,    
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict', 
+            maxAge: 24 * 60 * 60 * 1000, 
+    })
+    res.clearCookie('hasAuth', {
+            httpOnly: false,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 24 * 60 * 60 * 1000,
+    })
+    res.status(200).json({message:"successfully logged out"})
+})
 router.post('/user-details',async(req,res)=>{
     const email = req.userData?.email
 

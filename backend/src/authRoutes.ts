@@ -84,6 +84,14 @@ router.post('/login',async(req,res)=>{
             maxAge: 24 * 60 * 60 * 1000, 
         });
 
+        // Non-sensitive marker cookie for client-side bootstrapping checks.
+        res.cookie('hasAuth', '1', {
+            httpOnly: false,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 24 * 60 * 60 * 1000,
+        });
+
         return res.status(200).json({
             message:'login successful',
             payload:{...rest}

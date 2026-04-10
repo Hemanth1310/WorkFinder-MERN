@@ -3,7 +3,7 @@ import type { User } from "../types";
 
 export type AuthContextType = {
   userData: User | null;
-  updateUser: (data: User) => void;
+  updateUser: (data: User | null) => void;
   isLoading: boolean;
 };
 

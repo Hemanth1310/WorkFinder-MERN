@@ -8,27 +8,37 @@ type AuthContextProviderType = {
 }
 
 const BASE_API_URL = import.meta.env.VITE_API_URL
+const hasAuthCookie = () =>
+    document.cookie
+        .split(';')
+        .some((cookie) => cookie.trim().startsWith('hasAuth='))
 
 const AuthContextProvider = ({children}:AuthContextProviderType)=>{
     const [userData,setUserData] = useState<User|null>(null)
-    const [isLoading,setIsLoding] = useState(true)
+    const [isLoading,setIsLoding] = useState(hasAuthCookie)
 
-    const updateUser=(data:User)=>{
+    const updateUser=(data:User | null)=>{
         console.log(data)
         setUserData(data)
         setIsLoding(false)
     }
 
     useEffect(()=>{
+        if (!hasAuthCookie()) {
+            return
+        }
+
         const tokenValidetor =async ()=>{
             try{
                 const {data} = await axios.post(`${BASE_API_URL}/api/private/user-details`)
-                if(data){
-                    updateUser(data as User)
+                if(data?.payload){
+                    updateUser(data.payload as User)
+                } else {
+                    setIsLoding(false)
                 }
             }catch(err){
                 if(err instanceof AxiosError){
-                    console.log(err.response.data.error)
+                    console.log(err.response?.data?.error)
                 }else{
                     console.log("Unexpected Error occured")
                 }

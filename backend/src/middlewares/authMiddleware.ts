@@ -1,5 +1,5 @@
 import type { Request, Response,NextFunction } from "express";
-import jwt,{ JsonWebTokenError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import type { decodedTokenPayload } from "../types.js";
 
 declare global {
@@ -20,7 +20,7 @@ const authenticateToken = (
     const token = req.cookies.token
 
     if(!token){
-        return res.status(404).json({error:"Token not found."})
+      return res.status(401).json({error:"Token not found."})
     }
 
     try{
