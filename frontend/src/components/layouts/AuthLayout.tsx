@@ -19,7 +19,7 @@ const AuthLayout = ({isOpen, onClose}: Props) => {
     
   return (
    <Model isOpen={isOpen} onClose={onClose} title={title}>
-        <ActiveTab handleToggle={handleToggle}/>
+        <ActiveTab handleToggle={handleToggle} onClose={onClose}/>
    </Model>
   )
 }
