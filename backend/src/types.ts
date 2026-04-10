@@ -1,0 +1,9 @@
+export type Role = "CANDIDATE" | "EMPLOYER"
+export type decodedTokenPayload= {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    role: Role;
+    createdAt: Date;
+}

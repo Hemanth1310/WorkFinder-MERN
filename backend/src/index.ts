@@ -1,7 +1,8 @@
 import express from 'express'
 import AuthRouter from './authRoutes.js'
 import cors from 'cors'
-
+import cookieParser from "cookie-parser"
+import ProtectedRoute from "./protectedRoutes.js"
 const app = express()
 
 
@@ -18,8 +19,10 @@ app.use(
   })
 );
 
+app.use(cookieParser())
 app.use(express.json())
 app.use('/api/auth',AuthRouter)
+app.use('/api/private',ProtectedRoute)
 
 const port = Number(process.env["PORT"]) || 3001;
 app.listen(port,()=>{
