@@ -1,10 +1,11 @@
 import { Snail } from 'lucide-react'
 import React,{useState} from 'react'
 import AuthLayout from './AuthLayout'
+import { useAuthContextData } from '../../utils/useAuthContextData'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const isLoggedIn = true
+  const {userData} = useAuthContextData()
     const onClose = ()=>{
         setIsOpen(prev=>!prev)
     }
@@ -16,11 +17,12 @@ const Header = () => {
           </div>
            <p className='font-mono'>Work/Finder</p>
         </div>
-        {isLoggedIn?
+        {!userData?
         <div>
           <button className='hover:border-b-2 hover:border-b-brand-primary' onClick={()=>setIsOpen(true)}>Login</button>
         </div> :
         <div>
+            {userData.firstName}
           </div>}
 
       <AuthLayout isOpen={isOpen} onClose={onClose}/>
