@@ -18,7 +18,6 @@ const AuthContextProvider = ({children}:AuthContextProviderType)=>{
     const [isLoading,setIsLoding] = useState(hasAuthCookie)
 
     const updateUser=(data:User | null)=>{
-        console.log(data)
         setUserData(data)
         setIsLoding(false)
     }

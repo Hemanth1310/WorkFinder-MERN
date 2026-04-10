@@ -48,7 +48,6 @@ const Login = ({handleToggle, onClose}: Props) => {
               if(!data){
                 throw new Error("Login Failed")
               }      
-              console.log(data)
             updateUser(data.payload as User)
             onClose()   
             navigate('/')
