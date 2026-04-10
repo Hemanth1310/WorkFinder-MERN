@@ -4,6 +4,8 @@ import axios from '../../utils/authMiddleware'
 import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router'
+import { useAuthContextData } from '../../utils/useAuthContextData'
+import type { User } from '../../types'
 
 const BASE_API_URL = import.meta.env.VITE_API_URL
 
@@ -19,6 +21,7 @@ const Login = ({handleToggle, onClose}: Props) => {
         password:"",
         apiResponse:""
     })
+    const {updateUser} = useAuthContextData()
     
     const handleForm =async(formData: FormData) =>{
         const logindetails =Object.fromEntries(formData.entries())
@@ -31,7 +34,7 @@ const Login = ({handleToggle, onClose}: Props) => {
         }
 
         try{
-           await axios.post(`${BASE_API_URL}/api/auth/login`,parsedLoginDetails.data)
+           const {data} = await axios.post(`${BASE_API_URL}/api/auth/login`,parsedLoginDetails.data)
              toast.success('Login Successful',{
                     position: "top-right",
                     autoClose: 5000,
@@ -42,14 +45,19 @@ const Login = ({handleToggle, onClose}: Props) => {
                     progress: undefined,
                     theme: "light",
                     })
-             onClose()   
+              if(!data){
+                throw new Error("Login Failed")
+              }      
+              console.log(data)
+            updateUser(data.payload as User)
+            onClose()   
             navigate('/')
 
         }catch(err){
             if(err instanceof AxiosError){
                 setErrors(prev=>({...prev,apiResponse:err.response.data.error}))
             }
-             setErrors(prev=>({...prev,apiResponse:"Unexpected Error Occured. Try again Later!"}))
+            setErrors(prev=>({...prev,apiResponse:"Unexpected Error Occured. Try again Later!"}))
             toast.error('Login Failed',{
                     position: "top-right",
                     autoClose: 5000,
