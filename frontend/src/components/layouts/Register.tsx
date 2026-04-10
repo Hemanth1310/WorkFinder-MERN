@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import { registerSchema } from '../../utils/typechecker'
-
+import { AxiosError } from 'axios'
+import { toast } from 'react-toastify'
+import axios from '../../utils/authMiddleware'
 type Props = {
     handleToggle:(tab:string)=>void
+    onClose:()=>void
 }
+
+const BASE_API_URL = import.meta.env.VITE_API_URL
 
 const Register = ({handleToggle}: Props) => {
   const [errors, setErrors] = useState({
@@ -11,10 +16,11 @@ const Register = ({handleToggle}: Props) => {
           password:"",
           firstName:"",
           lastName:"",
-          role:""
+          role:"",
+          apiResponse:""
       })
       
-      const handleForm =(formData: FormData) =>{
+      const handleForm =async(formData: FormData) =>{
           const registerdetails =Object.fromEntries(formData.entries())
           const parsedRegisterDetails = registerSchema.safeParse(registerdetails)
           if(!parsedRegisterDetails.success){
@@ -24,7 +30,37 @@ const Register = ({handleToggle}: Props) => {
               }
           }
   
-          console.log(parsedRegisterDetails.data)
+          try{
+            await axios.post(`${BASE_API_URL}/api/auth/register`,parsedRegisterDetails.data)
+             toast.success('Registration Successful',{
+                                position: "top-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: false,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+            })
+            handleToggle('login')
+          }catch(err){
+            if(err instanceof AxiosError){
+                setErrors(prev=>({...prev,apiResponse:err.response.data.error}))
+            }else{
+                setErrors(prev=>({...prev,apiResponse:"Unexpected Error Occured. Please Try again later!"}))
+            }
+            toast.error('Registration Failed',{
+                                position: "top-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: false,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+            })
+            
+          }
   
   
       }
