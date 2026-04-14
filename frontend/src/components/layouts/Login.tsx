@@ -73,12 +73,12 @@ const Login = ({handleToggle, onClose}: Props) => {
     <form action={handleForm} className='w-full h-full flex flex-col items-center gap-5'>
         <div className='flex w-full flex-col gap-2'>
             <label >Username:</label>
-            <input name='email' type='email' className='w-full border-2 rounded-lg border-mist-200 text-lg p-1' placeholder=''></input>
+            <input name='email' type='email' className='w-full border-2 rounded-lg border-mist-200 text-lg p-1 pl-3' placeholder='Enter username here'></input>
             {errors.email && <p className='text-xs text-red-500'>{errors.email}</p>}
         </div>
         <div className='flex w-full flex-col gap-2'>
             <label >Password:</label>
-            <input name='password' type='password' className='border-2 rounded-lg border-mist-200 text-lg p-1' placeholder=''></input>
+            <input name='password' type='password' className='border-2 rounded-lg border-mist-200 text-lg p-1 pl-3' placeholder='Enter password here'></input>
              {errors.password && <p className='text-xs text-red-500'>{errors.password}</p>}
         </div>
         {errors.apiResponse && <p className='text-xs text-red-500'>Login Failed: {errors.apiResponse}</p>}
