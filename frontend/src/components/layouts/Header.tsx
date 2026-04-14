@@ -58,6 +58,26 @@ const Header = () => {
         <div>
           <button className='hover:border-b-2 hover:border-b-brand-primary' onClick={()=>setIsOpen(true)}>Login</button>
         </div> :
+        <div className='flex items-center gap-10'>
+          {userData.role==='EMPLOYER'?
+             <div className='flex'>
+             <div className='p-1 pl-5 pr-5 font-light text-sm border border-indigo-400'>
+              Openings
+            </div>
+            <div className='p-1 pl-5 pr-5 font-light text-sm border border-indigo-400'>
+              Make a post
+            </div>
+          </div>: <div className='flex'>
+             <div className='p-1 pl-5 pr-5 font-light text-sm border border-indigo-400'>
+              Find Work
+            </div>
+            <div className='p-1 pl-5 pr-5 font-light text-sm border border-indigo-400'>
+              Applications
+            </div>
+          </div>  
+        }
+          
+         
         <div className='relative flex gap-1'>
           <div className='flex flex-col items-center' onClick={()=>setIsDropDownOpen(prev=>!prev)}>
             <CircleUserIcon/>
@@ -80,7 +100,7 @@ const Header = () => {
                 <p className='text-sm'>Logout</p>
               </div>
             </div>}
-         
+         </div>
         </div>}
 
       <AuthLayout isOpen={isOpen} onClose={onClose}/>
