@@ -68,21 +68,21 @@ const Register = ({handleToggle}: Props) => {
       <form action={handleForm} className='w-full h-full flex flex-col items-center gap-5'>
           <div className='flex w-full flex-col gap-2'>
               <label >Username:</label>
-              <input name='email' type='email' className='w-full border-2 rounded-lg border-mist-200 text-lg p-1' placeholder=''></input>
+              <input name='email' type='email' className='w-full border-2 rounded-lg border-mist-200 text-lg p-1 pl-3' placeholder=''></input>
               {errors.email && <p className='text-xs text-red-500'>{errors.email}</p>}
           </div>
           <div className='flex w-full flex-col gap-2'>
               <label >First Name:</label>
-              <input name='firstName' type='text' className='border-2 rounded-lg border-mist-200 text-lg p-1' placeholder=''></input>
+              <input name='firstName' type='text' className='border-2 rounded-lg border-mist-200 text-lg p-1 pl-3' placeholder=''></input>
                {errors.firstName && <p className='text-xs text-red-500'>{errors.firstName}</p>}
           </div>
           <div className='flex w-full flex-col gap-2'>
               <label >Last Name:</label>
-              <input name='lastName' type='text' className='border-2 rounded-lg border-mist-200 text-lg p-1' placeholder=''></input>
+              <input name='lastName' type='text' className='border-2 rounded-lg border-mist-200 text-lg p-1 pl-3' placeholder=''></input>
                {errors.lastName && <p className='text-xs text-red-500'>{errors.lastName}</p>}
           </div>
            <div className='flex w-full gap-2 items-center'>
-              <label >Last Name:</label>
+              <label >Role:</label>
               <div className=" border border-mist-200   box-border text-sm rounded-md p-3">
                 <select className="w-full outline-none" name='role'>
                         <option value='CANDIDATE' >CANDIDATE</option>
@@ -92,7 +92,7 @@ const Register = ({handleToggle}: Props) => {
           </div>
           <div className='flex w-full flex-col gap-2'>
               <label >Password:</label>
-              <input name='password' type='password' className='border-2 rounded-lg border-mist-200 text-lg p-1' placeholder=''></input>
+              <input name='password' type='password' className='border-2 rounded-lg border-mist-200 text-lg p-1 pl-3' placeholder=''></input>
                {errors.password && <p className='text-xs text-red-500'>{errors.password}</p>}
           </div>
           <button className='w-full h-10 p-1 bg-brand-primary rounded-lg text-white'>Login</button>
