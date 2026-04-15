@@ -29,3 +29,24 @@ export const registerSchema = z.object({
 })
 
 
+export const jobTypes = ["Fulltime" , "Internship" , "Freelance"] as const
+export const experienceType= [ "Experienced" , "Intermediate" , "Begginer"] as const
+export const categoryType =["Software" , "Design" , "Sales" , "Marketing" , "Finance"] as const
+
+export const jobTypeSchema = z.enum(jobTypes)
+export const experienceSchema = z.enum(experienceType)
+export const categorySchema = z.enum(categoryType)
+
+export const jobPostingSchema = z.object({
+    title: z.string().min(1,"Title cannot be empty"),
+    description: z.string().min(1,"Description cannot be empty"),
+    companyName: z.string().min(1,"Company Name cannot be empty"),
+    location: z.string().min(1,"Location Cannot be empty"),
+    salary: z.number().int().nonnegative().nullable().optional().default(null),
+    jobType: jobTypeSchema,
+    experience: experienceSchema,
+    category: categorySchema
+})
+
+// Backward-compatible alias for older imports.
+export const jobPostingScema = jobPostingSchema
