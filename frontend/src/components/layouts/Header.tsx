@@ -4,6 +4,7 @@ import AuthLayout from './AuthLayout'
 import { useAuthContextData } from '../../utils/useAuthContextData'
 import { toast } from 'react-toastify'
 import axios from '../../utils/authMiddleware'
+import { NavLink } from 'react-router'
 
 const BASE_API_URL = import.meta.env.VITE_API_URL
 const Header = () => {
@@ -61,19 +62,19 @@ const Header = () => {
         <div className='flex items-center gap-10'>
           {userData.role==='EMPLOYER'?
              <div className='flex'>
-             <div className='p-1 pl-5 pr-5 font-light text-sm border border-indigo-400'>
-              Openings
-            </div>
-            <div className='p-1 pl-5 pr-5 font-light text-sm border border-indigo-400'>
-              Make a post
-            </div>
+              <NavLink to={'/'} className={({isActive})=>`p-1 pl-5 pr-5 font-light text-sm ${isActive ? 'border-2 border-indigo-400 rounded-lg bg-indigo-200' : ''}`}>
+                Openings
+              </NavLink>
+              <NavLink to='/admin/make-a-post' className={({isActive})=>`p-1 pl-5 pr-5 font-light text-sm ${isActive ? 'border-2 border-indigo-400 rounded-lg bg-indigo-100' : ''}`}>
+                Make a post
+              </NavLink>
           </div>: <div className='flex'>
-             <div className='p-1 pl-5 pr-5 font-light text-sm border border-indigo-400'>
+             <NavLink to='/' className={({isActive})=>`p-1 pl-5 pr-5 font-light text-sm ${isActive ? 'border border-indigo-400 rounded-lg' : ''}`}>
               Find Work
-            </div>
-            <div className='p-1 pl-5 pr-5 font-light text-sm border border-indigo-400'>
+            </NavLink>
+            <NavLink to='/applications' className={({isActive})=>`p-1 pl-5 pr-5 font-light text-sm ${isActive ? 'border border-indigo-400 rounded-lg' : ''}`}>
               Applications
-            </div>
+            </NavLink>
           </div>  
         }
           
