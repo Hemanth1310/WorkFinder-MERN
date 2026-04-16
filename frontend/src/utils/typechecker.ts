@@ -42,11 +42,17 @@ export const jobPostingSchema = z.object({
     description: z.string().min(1,"Description cannot be empty"),
     companyName: z.string().min(1,"Company Name cannot be empty"),
     location: z.string().min(1,"Location Cannot be empty"),
-    salary: z.number().int().nonnegative().nullable().optional().default(null),
+    salary:  z.preprocess(
+    (value) => {
+        if (value === '' || value === null || value === undefined) {
+            return null
+        }
+        return Number(value)
+    },
+    z.number().int().nonnegative().nullable()
+).default(null),
     jobType: jobTypeSchema,
     experience: experienceSchema,
     category: categorySchema
 })
 
-// Backward-compatible alias for older imports.
-export const jobPostingScema = jobPostingSchema
