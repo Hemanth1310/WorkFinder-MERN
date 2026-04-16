@@ -73,6 +73,7 @@ model JobPosting {
   jobType     JobType
   experience  Experience
   category    Category
+  isActive    Boolean  @default(false)
   salary      Int?
   
   // The Employer who posted it
