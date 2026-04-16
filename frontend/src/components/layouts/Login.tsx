@@ -55,8 +55,9 @@ const Login = ({handleToggle, onClose}: Props) => {
         }catch(err){
             if(err instanceof AxiosError){
                 setErrors(prev=>({...prev,apiResponse:err.response.data.error}))
-            }
-            setErrors(prev=>({...prev,apiResponse:"Unexpected Error Occured. Try again Later!"}))
+            }else{
+                setErrors(prev=>({...prev,apiResponse:"Unexpected Error Occured. Try again Later!"}))
+            }        
             toast.error('Login Failed',{
                     position: "top-right",
                     autoClose: 5000,
